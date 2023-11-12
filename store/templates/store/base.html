@@ -30,7 +30,7 @@
 			>
 				<div class="container-fluid">
 					<a class="navbar-brand" href="{% url 'store:home' %}">
-						<i class="fa-solid fa-shop" style="color: auto"></i>
+						<i class="fa-solid fa-shop"></i>
 					</a>
 					<button
 						class="navbar-toggler"
@@ -88,9 +88,34 @@
             {% endblock %}
 		</main>
 
-		<footer>
-			<p>@ 2023 Online Store</p>
-		</footer>
+		<footer class="bg-dark text-white mt-4">
+            <div class="container-fluid py-3">
+                <!-- Footer Content Here -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>About Online Store</h5>
+                        <p>Online Store offers a wide range of products and services. Find what you need with great deals!</p>
+                    </div>
+                    <div class="col-md-3">
+                        <h5>Quick Links</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="{% url 'store:category_list' %}" class="text-white">Products</a></li>
+                            <li><a href="{% url 'store:report_view' %}" class="text-white">Report</a></li>
+                            <li><a href="{% url 'store:purchase_view' %}" class="text-white">Purchase</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <h5>Follow Us</h5>
+                        <a href="https://www.facebook.com" class="text-white me-2"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.twitter.com" class="text-white me-2"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com" class="text-white"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center py-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                © 2023 Online Store
+            </div>
+        </footer>
 
 		{# Bootstrap JS, Popper.js #}
 		<script
