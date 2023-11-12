@@ -3,8 +3,20 @@
 {% block title %}Purchase Success{% endblock %}
 
 {% block content %}
-<h1>Purchase Successfull</h1>
-<p>Your purchase has been successfully submitted.</p>
-<a href="{% url 'store:home' %}">Return to Home</a>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card text-center">
+                <div class="card-header">
+                    <h2>Purchase Successful</h2>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Your purchase has been successfully submitted.</p>
+                    <a href="{% url 'store:home' %}" class="btn btn-primary">Return to Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
