@@ -1,9 +1,11 @@
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, TemplateView
 from django.views import View
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .forms import PurchaseForm
 from .models import ProductCategory, Product, Purchase
 from django.db.models import Sum
 from django.utils.dateparse import parse_date
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class CategoryListView(ListView):
@@ -53,3 +55,32 @@ class ReportView(View):
                 'products': Product.objects.all(),
             },
         )
+
+
+class PurchaseView(LoginRequiredMixin, View):
+    def get(self, request):
+        form = PurchaseForm()
+        return render(request, 'store/purchase.html', {'form': form})
+
+    def post(self, request):
+        form = PurchaseForm(request.POST)
+        if form.is_valid():
+            Purchase.objects.create(
+                user=request.user,
+                product=form.cleaned_data['product'],
+                quantity=form.cleaned_data['quantity'],
+            )
+            # Redirect to a success page or similar
+            return redirect('purchase_success')
+        else:
+            # If form is not valid, re-render the page with form errors
+            return render(request, 'store/purchase.html', {'form': form})
+
+
+class PurchaseSuccessView(TemplateView):
+    template_name = 'store/purchase_success.html'
+
+
+class HomeView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'store/home.html')

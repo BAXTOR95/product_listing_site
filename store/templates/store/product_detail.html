@@ -1,6 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Product Detail{% endblock %}
+
+{% block content %}
 <h1>{{ object.title }}</h1>
 <img src="{{ object.image.url }}" alt="{{ object.title }}" />
 <p>Price: ${{ object.price }}</p>
 <p>Description: {{ object.description }}</p>
 <p>Average Rating: {{ object.average_rating }}</p>
 <p>Rating Count: {{ object.rating_count }}</p>
+{% endblock %}
+

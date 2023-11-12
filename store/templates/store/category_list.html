@@ -1,3 +1,8 @@
+{% extends 'base.html' %}
+
+{% block title %}Category List{% endblock %}
+
+{% block content %}
 <h1>Categories</h1>
 <ul>
 	{% for category in object_list %}
@@ -6,3 +11,4 @@
 	</li>
 	{% endfor %}
 </ul>
+{% endblock %}

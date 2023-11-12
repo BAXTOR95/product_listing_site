@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <h1>Welcome to Our Product Listing Site</h1>
+    <p>This is the homepage of our simple product listing site.</p>
+    <a href="{% url 'category_list' %}">View Products</a>
+{% endblock %}
