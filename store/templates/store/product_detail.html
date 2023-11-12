@@ -3,11 +3,37 @@
 {% block title %}Product Detail{% endblock %}
 
 {% block content %}
-<h1>{{ object.title }}</h1>
-<img src="{{ object.image.url }}" alt="{{ object.title }}" />
-<p>Price: ${{ object.price }}</p>
-<p>Description: {{ object.description }}</p>
-<p>Average Rating: {{ object.average_rating }}</p>
-<p>Rating Count: {{ object.rating_count }}</p>
-{% endblock %}
+<div class="container mt-4">
+    <!-- Back Button -->
+    <div class="mb-3">
+        <a href="{% url 'store:product_list' object.category.title %}" class="btn btn-secondary">Back to Products</a>
+    </div>
 
+	<div class="row">
+		<div class="col-md-6">
+			<img
+				src="{{ object.image.url }}"
+				alt="{{ object.title }}"
+				class="img-fluid img-thumbnail product-img"
+			/>
+		</div>
+		<div class="col-md-6">
+			<div class="card">
+				<div class="card-body">
+					<h1 class="card-title">{{ object.title }}</h1>
+					<p class="card-text"><strong>Price:</strong> ${{ object.price }}</p>
+					<p class="card-text">
+						<strong>Description:</strong> {{ object.description }}
+					</p>
+					<p class="card-text">
+						<strong>Average Rating:</strong> {{ object.average_rating }}
+					</p>
+					<p class="card-text">
+						<strong>Rating Count:</strong> {{ object.rating_count }}
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
