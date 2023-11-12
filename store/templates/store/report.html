@@ -3,33 +3,57 @@
 {% block title %}Report{% endblock %}
 
 {% block content %}
-<h1>Product Sales Report</h1>
+<div class="container mt-4">
+    <h1 class="mb-4">Product Sales Report</h1>
 
-<form method="post">
-	{% csrf_token %}
-	<label for="product">Select Product:</label>
-	<select name="product" id="product">
-		{% for product in products %}
-		<option value="{{ product.id }}">{{ product.title }}</option>
-		{% endfor %}
-	</select>
+    <form method="post" class="mb-4">
+        {% csrf_token %}
+        <div class="row g-3">
+            <div class="col-md-4">
+                <label for="product" class="form-label">Select Product:</label>
+                <select name="product" id="product" class="form-select">
+                    {% for product in products %}
+                    <option value="{{ product.id }}">{{ product.title }}</option>
+                    {% endfor %}
+                </select>
+            </div>
 
-	<label for="start_date">Start Date:</label>
-	<input type="date" name="start_date" id="start_date" required />
+            <div class="col-md-4">
+                <label for="start_date" class="form-label">Start Date:</label>
+                <input type="date" name="start_date" id="start_date" class="form-control" required />
+            </div>
 
-	<label for="end_date">End Date:</label>
-	<input type="date" name="end_date" id="end_date" required />
+            <div class="col-md-4">
+                <label for="end_date" class="form-label">End Date:</label>
+                <input type="date" name="end_date" id="end_date" class="form-control" required />
+            </div>
+        </div>
 
-	<button type="submit">Generate Report</button>
-</form>
+        <button type="submit" class="btn btn-primary mt-3">Generate Report</button>
+    </form>
 
-{% if total_revenue %}
-<h2>Report for {{ product.title }}</h2>
-<p>Total Revenue: ${{ total_revenue }}</p>
-<ul>
-	{% for purchase in purchases %}
-	<li>Purchased by {{purchase.user.username}} on {{purchase.purchase_date}}</li>
-	{% endfor %}
-</ul>
-{% endif %}
+    {% if total_revenue %}
+    <div class="report-results">
+        <h2>Report for {{ product.title }}</h2>
+        <p>Total Revenue: ${{ total_revenue|floatformat:2 }}</p>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Purchased By</th>
+                    <th scope="col">Purchase Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for purchase in purchases %}
+                <tr>
+                    <td>{{ purchase.user.username }}</td>
+                    <td>{{ purchase.purchase_date }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+</div>
 {% endblock %}
