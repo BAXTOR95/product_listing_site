@@ -1,11 +1,12 @@
 from django.views.generic import ListView, DetailView, TemplateView
 from django.views import View
 from django.shortcuts import render, redirect
-from .forms import PurchaseForm
+from .forms import PurchaseForm, UserRegisterForm
 from .models import ProductCategory, Product, Purchase
 from django.db.models import Sum
 from django.utils.dateparse import parse_date
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 
 
 class CategoryListView(ListView):
@@ -84,3 +85,18 @@ class PurchaseSuccessView(TemplateView):
 class HomeView(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'store/home.html')
+
+
+def register(request):
+    """Function-based view for User registration
+    """
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Account created for {username}!')
+            return redirect('login')
+        else:
+            form = UserRegisterForm()
+        return render(request, 'store/register.html', {'form': form})
