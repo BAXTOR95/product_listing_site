@@ -7,6 +7,7 @@ from django.db.models import Sum
 from django.utils.dateparse import parse_date
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
+from django.contrib.auth import login
 
 
 class CategoryListView(ListView):
@@ -19,7 +20,7 @@ class ProductListView(ListView):
     template_name = 'store/product_list.html'
 
     def get_queryset(self):
-        return Product.objects.filter(category__tile=self.kwargs['category'])
+        return Product.objects.filter(category__title=self.kwargs['category'])
 
 
 class ProductDetailView(DetailView):
@@ -72,7 +73,7 @@ class PurchaseView(LoginRequiredMixin, View):
                 quantity=form.cleaned_data['quantity'],
             )
             # Redirect to a success page or similar
-            return redirect('purchase_success')
+            return redirect('store:purchase_success')
         else:
             # If form is not valid, re-render the page with form errors
             return render(request, 'store/purchase.html', {'form': form})
@@ -93,10 +94,12 @@ def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
             username = form.cleaned_data.get('username')
             messages.success(request, f'Account created for {username}!')
-            return redirect('login')
-        else:
-            form = UserRegisterForm()
-        return render(request, 'store/register.html', {'form': form})
+            login(request, user)  # Log the user in after registering
+            return redirect('store:home')
+    else:
+        form = UserRegisterForm()
+
+    return render(request, 'store/register.html', {'form': form})
