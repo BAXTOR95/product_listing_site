@@ -1,0 +1,29 @@
+<h1>Product Sales Report</h1>
+
+<form method="post">
+	{% csrf_token %}
+	<label for="product">Select Product:</label>
+	<select name="product" id="product">
+		{% for product in products %}
+		<option value="{{ product.id }}">{{ product.title }}</option>
+		{% endfor %}
+	</select>
+
+	<label for="start_date">Start Date:</label>
+	<input type="date" name="start_date" id="start_date" required />
+
+	<label for="end_date">End Date:</label>
+	<input type="date" name="end_date" id="end_date" required />
+
+	<button type="submit">Generate Report</button>
+</form>
+
+{% if total_revenue %}
+<h2>Report for {{ product.title }}</h2>
+<p>Total Revenue: ${{ total_revenue }}</p>
+<ul>
+	{% for purchase in purchases %}
+	<li>Purchased by {{purchase.user.username}} on {{purchase.purchase_date}}</li>
+	{% endfor %}
+</ul>
+{% endif %}
