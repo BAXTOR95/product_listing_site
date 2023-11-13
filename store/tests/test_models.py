@@ -125,5 +125,3 @@ class PurchaseProductModelTest(TestCase):
         purchase_product = PurchaseProduct.objects.get(id=1)
         expected_quantity = 2
         self.assertEqual(purchase_product.quantity, expected_quantity)
-
-    # Add more tests for fields like quantity
