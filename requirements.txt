@@ -6,6 +6,7 @@ django-widget-tweaks==1.5.0
 fontawesomefree==6.4.2
 idna==3.4
 Pillow==10.1.0
+pytz==2023.3.post1
 requests==2.31.0
 sqlparse==0.4.4
 tzdata==2023.3

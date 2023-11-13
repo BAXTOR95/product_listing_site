@@ -24,9 +24,17 @@ class Product(models.Model):
 
 class Purchase(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.IntegerField()
-    purchase_date = models.DateTimeField(auto_now_add=True)
+    product = models.ManyToManyField(Product, through='PurchaseProduct')
+    purchase_date = models.DateTimeField()
 
     def __str__(self) -> str:
-        return f'{self.user.username} - {self.product.title}'
+        return f'{self.user.username} - {self.purchase_date}'
+
+
+class PurchaseProduct(models.Model):
+    purchase = models.ForeignKey(Purchase, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+
+    def __str__(self) -> str:
+        return f'{self.purchase} - {self.product.title} x {self.quantity}'

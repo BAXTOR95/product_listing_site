@@ -1,5 +1,6 @@
 body {
 	font-family: Arial, sans-serif;
+	padding-top: 80px;
 }
 
 .purchase-form {
@@ -8,6 +9,14 @@ body {
 	padding: 20px;
 	border: 1px solid #ddd;
 	border-radius: 5px;
+}
+
+.product-img {
+	max-height: 400px;
+    width: auto;
+    display: block; /* Centers image in the column */
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .form-group {

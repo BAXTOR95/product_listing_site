@@ -47,8 +47,8 @@
             <tbody>
                 {% for purchase in purchases %}
                 <tr>
-                    <td>{{ purchase.user.username }}</td>
-                    <td>{{ purchase.purchase_date }}</td>
+                    <td>{{ purchase.purchase.user.username }}</td>
+                    <td>{{ purchase.purchase.purchase_date }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
