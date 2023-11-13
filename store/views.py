@@ -44,23 +44,14 @@ class ReportView(View):
         start_date = timezone.make_aware(parse_datetime(start_date_str))
         end_date = timezone.make_aware(parse_datetime(end_date_str))
 
-        print('start_date', start_date)
-        print('end_date', end_date)
-
-        print('product_id', selected_product_id)
-        print('purchase__purchase_date__range', [start_date, end_date])
-
         purchases = PurchaseProduct.objects.filter(
             product_id=selected_product_id,
             purchase__purchase_date__range=[start_date, end_date],
         )
-        print('purchases', purchases)
         total_revenue = sum(
             purchase.product.price * purchase.quantity for purchase in purchases
         )
-        print('total_revenue', total_revenue)
         product = Product.objects.get(id=selected_product_id)
-        print('product', product)
 
         return render(
             request,

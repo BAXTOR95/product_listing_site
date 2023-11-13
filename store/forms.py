@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from django.core.exceptions import ValidationError
 from .models import Product, PurchaseProduct
 
 
@@ -17,6 +18,16 @@ class PurchaseForm(forms.ModelForm):
         self.fields['quantity'].widget.attrs.update({'class': 'form-control'})
         self.fields['quantity'].initial = 1
         self.fields['quantity'].min_value = 1
+
+    def clean_quantity(self):
+        """
+        Custom validation for the 'quantity' field.
+        Ensures that the quantity is at least 1.
+        """
+        quantity = self.cleaned_data.get('quantity')
+        if quantity < 1:
+            raise ValidationError("Quantity must be at least 1.")
+        return quantity
 
 
 class UserRegisterForm(UserCreationForm):
