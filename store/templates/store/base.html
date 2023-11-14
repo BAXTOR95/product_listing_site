@@ -103,7 +103,9 @@
                         <ul class="list-unstyled">
                             <li><a href="{% url 'store:category_list' %}" class="text-white">Products</a></li>
                             <li><a href="{% url 'store:report_view' %}" class="text-white">Report</a></li>
+							{% if user.is_authenticated %}
                             <li><a href="{% url 'store:purchase_view' %}" class="text-white">Purchase</a></li>
+							{% endif %}
                         </ul>
                     </div>
                     <div class="col-md-3">
