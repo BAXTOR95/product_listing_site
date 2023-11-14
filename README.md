@@ -64,7 +64,7 @@ After setting up the project, you can:
 
 ## Demo
 
-[Live-demo](baxtor95.pythonanywhere.com)
+[Live-demo](http://baxtor95.pythonanywhere.com/store/)
 
 ## License
 
