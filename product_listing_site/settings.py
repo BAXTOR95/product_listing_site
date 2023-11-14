@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'fontawesomefree',
     'store',
     'widget_tweaks',
+    'django_dbml',
 ]
 
 MIDDLEWARE = [

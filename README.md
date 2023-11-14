@@ -66,9 +66,13 @@ After setting up the project, you can:
 
 [Live-demo](http://baxtor95.pythonanywhere.com/store/)
 
+## Database Diagram
+
+![Database Diagram](./dbdiagram.png)
+
 ## License
 
-Distributed under the MIT License. See LICENSE for more information.
+Distributed under the MIT License. See [LICENSE](./LICENSE) for more information.
 
 ## Contact
 
