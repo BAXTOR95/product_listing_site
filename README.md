@@ -26,25 +26,32 @@ To set up this project locally, follow these steps:
    pip install -r requirements.txt
    ```
 
-4. Run the Django migrations to set up your database:
+4. Create a `.env` file in the root directory of the project and add the following contents:
+
+   ```plaintext
+   SECRET_KEY=yoursecretkey
+   DEBUG=1
+   ```
+
+5. Run the Django migrations to set up your database:
 
    ```bash
    python manage.py migrate
    ```
 
-5. Run the populate_db command to populate your database with data from <https://fakestoreapi.com/docs>:
+6. Run the populate_db command to populate your database with data from <https://fakestoreapi.com/docs>:
 
    ```bash
    python manage.py populate_db
    ```
 
-6. Start the development server:
+7. Start the development server:
 
    ```bash
    python manage.py runserver
    ```
 
-7. Open <http://127.0.0.1:8000/> in your browser to view the site
+8. Open <http://127.0.0.1:8000/> in your browser to view the site
 
 ## Usage
 
