@@ -64,7 +64,7 @@ After setting up the project, you can:
 
 ## Demo
 
-[Live-demo](http://baxtor95.pythonanywhere.com/store/)
+[Live-demo](http://productstorehub-baxtor95.pythonanywhere.com/store/)
 
 ## Database Diagram
 
