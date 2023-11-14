@@ -160,10 +160,47 @@ class ReportViewTest(TestCase):
         purchase = Purchase.objects.create(user=user, purchase_date=purchase_date)
         PurchaseProduct.objects.create(purchase=purchase, product=product, quantity=2)
 
+        # Create a staff user
+        cls.staff_user = User.objects.create_user(
+            'staffuser', 'staff@example.com', 'password', is_staff=True
+        )
+
+        # Create a non-staff user
+        cls.non_staff_user = User.objects.create_user(
+            'nonstaffuser', 'nonstaff@example.com', 'password', is_staff=False
+        )
+
+    def test_staff_user_access(self):
+        """
+        Test that a staff user can access the ReportView.
+        """
+        self.client.login(username='staffuser', password='password')
+        response = self.client.get(reverse('store:report_view'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'store/report.html')
+
+    def test_non_staff_user_access(self):
+        """
+        Test that a non-staff user is redirected or denied access.
+        """
+        self.client.login(username='nonstaffuser', password='password')
+        response = self.client.get(reverse('store:report_view'))
+        self.assertNotEqual(response.status_code, 200)
+
+    def test_anonymous_user_access(self):
+        """
+        Test that an anonymous user is redirected to the login page.
+        """
+        response = self.client.get(reverse('store:report_view'))
+        self.assertNotEqual(response.status_code, 200)
+
     def test_get_request(self):
         """
         Ensure that the ReportView returns the correct template and status code on GET request.
         """
+        # Log in as a staff user
+        self.client.login(username='staffuser', password='password')
+
         # Simulate GET request
         response = self.client.get(reverse('store:report_view'))
         self.assertEqual(response.status_code, 200)
@@ -173,6 +210,9 @@ class ReportViewTest(TestCase):
         """
         Test the functionality of ReportView on POST request with valid data.
         """
+        # Log in as a staff user
+        self.client.login(username='staffuser', password='password')
+
         # Simulate POST request with data
         start_date = timezone.now() - timezone.timedelta(days=1)
         end_date = timezone.now() + timezone.timedelta(days=1)

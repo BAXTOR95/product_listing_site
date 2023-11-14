@@ -5,7 +5,7 @@ from .forms import PurchaseForm, UserRegisterForm
 from .models import ProductCategory, Product, Purchase, PurchaseProduct
 from django.db.models import Sum
 from django.utils.dateparse import parse_date
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from django.contrib.auth import login
 from django.utils import timezone
@@ -30,7 +30,11 @@ class ProductDetailView(DetailView):
     template_name = 'store/product_detail.html'
 
 
-class ReportView(View):
+class ReportView(LoginRequiredMixin, UserPassesTestMixin, View):
+    def test_func(self):
+        # Determine whether the user is staff
+        return self.request.user.is_staff
+
     def get(self, request):
         products = Product.objects.all()
         return render(request, 'store/report.html', {'products': products})

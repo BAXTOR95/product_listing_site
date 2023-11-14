@@ -22,7 +22,7 @@
 		{# Custom CSS #}
 		<link rel="stylesheet" href="{% static 'store/style.css' %}" />
 	</head>
-	<body>
+	<body class="d-flex flex-column" style="min-height: 100vh;">
 		<header>
 			<nav
 				class="navbar navbar-expand-lg bg-body-tertiary bg-dark border-bottom border-body fixed-top"
@@ -50,11 +50,13 @@
 									>Products</a
 								>
 							</li>
+							{% if user.is_authenticated and user.is_staff %}
 							<li class="nav-item">
 								<a class="nav-link" href="{% url 'store:report_view' %}"
 									>Report</a
 								>
 							</li>
+							{% endif %}
 							{% if user.is_authenticated %}
 							<li class="nav-item">
 								<a class="nav-link" href="{% url 'store:purchase_view' %}"
@@ -63,8 +65,8 @@
 							</li>
 							{% endif %}
 						</ul>
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                            {% if user.is_authenticated %}
+						<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+							{% if user.is_authenticated %}
 							<li class="nav-item">
 								<a class="nav-link" href="{% url 'store:logout' %}">Logout</a>
 							</li>
@@ -78,48 +80,50 @@
 								<a class="nav-link" href="{% url 'store:login' %}">Login</a>
 							</li>
 							{% endif %}
-                        </ul>
+						</ul>
 					</div>
 				</div>
 			</nav>
 		</header>
 
-		<main>
+		<main class="flex-grow-1 pb-4"> {# Content grows to fill available space #}
 			{% block content %}
-            {# content will be overridden in child templates #}
-            {% endblock %}
+			{# content will be overridden in child templates #}
+			{% endblock %}
 		</main>
 
-		<footer class="bg-dark text-white mt-4">
-            <div class="container-fluid py-3">
-                <!-- Footer Content Here -->
-                <div class="row">
-                    <div class="col-md-6">
-                        <h5>About Online Store</h5>
-                        <p>Online Store offers a wide range of products and services. Find what you need with great deals!</p>
-                    </div>
-                    <div class="col-md-3">
-                        <h5>Quick Links</h5>
-                        <ul class="list-unstyled">
-                            <li><a href="{% url 'store:category_list' %}" class="text-white">Products</a></li>
-                            <li><a href="{% url 'store:report_view' %}" class="text-white">Report</a></li>
-							{% if user.is_authenticated %}
-                            <li><a href="{% url 'store:purchase_view' %}" class="text-white">Purchase</a></li>
+		<footer class="mt-auto bg-dark text-white"> {# Footer sticks to the bottom #}
+			<div class="container-fluid py-3">
+				<!-- Footer Content Here -->
+				<div class="row">
+					<div class="col-md-6">
+						<h5>About Online Store</h5>
+						<p>Online Store offers a wide range of products and services. Find what you need with great deals!</p>
+					</div>
+					<div class="col-md-3">
+						<h5>Quick Links</h5>
+						<ul class="list-unstyled">
+							<li><a href="{% url 'store:category_list' %}" class="text-white">Products</a></li>
+							{% if user.is_authenticated and user.is_staff %}
+							<li><a href="{% url 'store:report_view' %}" class="text-white">Report</a></li>
 							{% endif %}
-                        </ul>
-                    </div>
-                    <div class="col-md-3">
-                        <h5>Follow Us</h5>
-                        <a href="https://www.facebook.com" class="text-white me-2"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://www.twitter.com" class="text-white me-2"><i class="fab fa-twitter"></i></a>
-                        <a href="https://www.instagram.com" class="text-white"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="text-center py-3" style="background-color: rgba(0, 0, 0, 0.2);">
-                © 2023 Online Store
-            </div>
-        </footer>
+							{% if user.is_authenticated %}
+							<li><a href="{% url 'store:purchase_view' %}" class="text-white">Purchase</a></li>
+							{% endif %}
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h5>Follow Us</h5>
+						<a href="https://www.facebook.com" class="text-white me-2"><i class="fab fa-facebook-f"></i></a>
+						<a href="https://www.twitter.com" class="text-white me-2"><i class="fab fa-twitter"></i></a>
+						<a href="https://www.instagram.com" class="text-white"><i class="fab fa-instagram"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="text-center py-3" style="background-color: rgba(0, 0, 0, 0.2);">
+				© 2023 Online Store
+			</div>
+		</footer>
 
 		{# Bootstrap JS, Popper.js #}
 		<script
