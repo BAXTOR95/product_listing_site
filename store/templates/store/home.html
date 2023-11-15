@@ -3,30 +3,33 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    <!-- Hero Section -->
-    <div class="p-5 mb-4 bg-light rounded-3 border">
-        <div class="container-fluid py-5">
-            <h1 class="display-5 fw-bold">Welcome to Our Product Listing Site</h1>
-            <p class="col-md-8 fs-4">Explore our wide range of products and find what you need with great deals!</p>
-            <a class="btn btn-primary btn-lg" href="{% url 'store:category_list' %}" role="button">View Products</a>
+    <div class="container-fluid">
+        <!-- Hero Section -->
+        <div class="p-5 mb-4 bg-light rounded-3 border">
+            <div class="container-fluid py-5">
+                <h1 class="display-5 fw-bold">Welcome to Our Product Listing Site</h1>
+                <p class="col-md-8 fs-4">Explore our wide range of products and find what you need with great deals!</p>
+                <a class="btn btn-primary btn-lg" href="{% url 'store:category_list' %}" role="button">View Products</a>
+            </div>
+        </div>
+
+        <!-- Additional Sections (Optional) -->
+        <div class="row align-items-md-stretch">
+            <div class="col-md-6">
+                <div class="h-100 p-5 text-white bg-dark rounded-3">
+                    <h2>Special Offers</h2>
+                    <p>Don't miss out on our exclusive deals and discounts on select products.</p>
+                    <button class="btn btn-outline-light disabled" type="button">Explore Offers</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="h-100 p-5 bg-light border rounded-3">
+                    <h2>Latest Products</h2>
+                    <p>Check out the latest additions to our catalog and stay ahead of the trends.</p>
+                    <button class="btn btn-outline-secondary disabled" type="button">New Arrivals</button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Additional Sections (Optional) -->
-    <div class="row align-items-md-stretch">
-        <div class="col-md-6">
-            <div class="h-100 p-5 text-white bg-dark rounded-3">
-                <h2>Special Offers</h2>
-                <p>Don't miss out on our exclusive deals and discounts on select products.</p>
-                <button class="btn btn-outline-light disabled" type="button">Explore Offers</button>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="h-100 p-5 bg-light border rounded-3">
-                <h2>Latest Products</h2>
-                <p>Check out the latest additions to our catalog and stay ahead of the trends.</p>
-                <button class="btn btn-outline-secondary disabled" type="button">New Arrivals</button>
-            </div>
-        </div>
-    </div>
 {% endblock %}
